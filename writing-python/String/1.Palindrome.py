@@ -23,4 +23,10 @@ def isPalindrome(s: str) -> bool:
 
   return True
 
-print(isPalindrome('abbccbba'))
+def isPalindrome2(s: str) -> bool:
+  filtered = "".join(list(filter(str.isalnum, s))).lower()
+  return filtered == filtered[::-1]
+
+# print(isPalindrome('a.bb,.c/c/,b.,.ba'))
+print(isPalindrome2('a.bb,.c/c/,b.,.ba'))
+print(isPalindrome2('.,//`.-/.,='))
