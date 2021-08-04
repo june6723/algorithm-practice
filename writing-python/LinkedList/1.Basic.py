@@ -57,20 +57,39 @@ class LinkedList:
     
     prev.next = curr.next
     curr = None
-      
+
+  def remove_node(self, node: Node):
+    if node == None:
+      return
+
+    next_node = node.next
+    if next_node is None:
+      node = None
+      return
+
+    node.data = next_node.data
+    node.next = next_node.data
+    next_node = None
+
+  def reverse(self):
+    if self.head is None:
+      return
+    prev = None
+    curr = self.head
+    next = None
+
+    while (curr is not None):
+      next = curr.next
+      curr.next = prev
+      prev = curr
+      curr = next
+    self.head = prev
     
     
 linked_list = LinkedList()
-
-node1 = Node(11)
-linked_list.head = node1
-node2 = Node(12)
-node3 = Node(13)
-
-node1.next = node2
-node2.next = node3
-
-linked_list.push(10)
-linked_list.remove(9)
+# linked_list.push_back(10)
+# linked_list.push_back(11)
+linked_list.push_back(12)
+linked_list.reverse()
 linked_list.traverse()
 
