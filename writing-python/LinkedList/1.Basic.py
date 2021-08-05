@@ -84,12 +84,37 @@ class LinkedList:
       prev = curr
       curr = next
     self.head = prev
-    
+  
+  def reverse_stack(self):
+    stack = []
+    curr = self.head
+
+    if curr is None:
+      return
+    while curr.next is not None:
+      stack.append(curr)
+      curr = curr.next
+    self.head = curr
+    while len(stack) > 0:
+      next_node = stack.pop()
+      curr.next = next_node
+      curr = next_node
+    curr.next = None
+  
+def reverse_recursion(head: Node) -> Node:
+  if head == None or head.next == None:
+    return head
+  reversed_list = reverse_recursion(head.next)
+  head.next.next = head
+  head.next = None
+
+  return reversed_list
     
 linked_list = LinkedList()
-# linked_list.push_back(10)
-# linked_list.push_back(11)
+linked_list.push_back(10)
+linked_list.push_back(11)
 linked_list.push_back(12)
-linked_list.reverse()
+reversed = reverse_recursion(linked_list.head)
+linked_list.head = reversed
 linked_list.traverse()
 
