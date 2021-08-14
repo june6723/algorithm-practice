@@ -26,11 +26,26 @@ def hasCycle(head: Node) -> bool:
       visit -= 1
   return False
 
+def hasCycle_hashmap(head: Node) -> bool:
+  curr = head
+  hashmap = set([])
+  if curr is None or curr.next is None:
+    return False
+  
+  while curr is not None:
+    if curr in hashmap:
+      return True
+    else:
+      hashmap.add(curr)
+    curr = curr.next
+  return False
+      
+
 node4 = Node(4, None)
 node3 = Node(3, node4)
 node2= Node(2, node3)
 node1 = Node(1, node2)
 node0 = Node(0, node1)
-node4.next = node0
+# node4.next = node0
 
-print(hasCycle(node0))
+print(hasCycle_hashmap(node0))
