@@ -49,3 +49,5 @@ node0 = Node(0, node1)
 # node4.next = node0
 
 print(hasCycle_hashmap(node0))
+
+whatever
