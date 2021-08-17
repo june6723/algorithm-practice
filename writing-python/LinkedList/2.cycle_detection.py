@@ -39,7 +39,19 @@ def hasCycle_hashmap(head: Node) -> bool:
       hashmap.add(curr)
     curr = curr.next
   return False
-      
+def hasCycle_fast_slow(head: Node) -> bool:
+  slow = head
+  fast = head
+
+  while (slow is not None and fast is not None):
+    slow = slow.next
+    fast = fast.next
+    if fast is not None:
+      fast = fast.next
+    if slow is fast:
+      return True
+    
+  return False
 
 node4 = Node(4, None)
 node3 = Node(3, node4)
@@ -48,6 +60,4 @@ node1 = Node(1, node2)
 node0 = Node(0, node1)
 # node4.next = node0
 
-print(hasCycle_hashmap(node0))
-
-whatever
+print(hasCycle_fast_slow(node0))
