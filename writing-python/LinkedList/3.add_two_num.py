@@ -68,7 +68,40 @@ def add_with_stack(l1: Node, l2: Node) -> Node:
   #     curr2 = s2.pop()
   #   else:
   #     curr2 = 0
-    
+
+def reverse_recursion(head: Node) -> Node:
+  if head == None or head.next == None:
+    return head
+  reversed_list = reverse_recursion(head.next)
+  head.next.next = head
+  head.next = None
+
+  return reversed_list
+
+def add_with_reverse(l1: Node, l2: Node) -> Node:
+  node1 = reverse_recursion(l1)
+  node2 = reverse_recursion(l2)
+
+  value = 0
+  carry = 0
+  newNode = None
+  while (node1 != None or node2 != None):
+    num1 = node1.val if node1 else 0
+    num2 = node2.val if node2 else 0
+
+    carry, value = divmod(num1 + num2 + carry, 10)
+    temp = newNode
+    newNode = Node(value)
+    newNode.next = temp
+
+    node1 = node1.next if node1 else None
+    node2 = node2.next if node2 else None
+
+  if carry == 1:
+    temp = newNode
+    newNode = Node(1)
+    newNode.next = temp
+  return newNode
 
 node_a3 = Node(3, None)
 node_a2 = Node(2, node_a3)
@@ -76,7 +109,8 @@ node_a1 = Node(9, node_a2)
 
 node_b3 = Node(3, None)
 node_b2 = Node(2, node_b3)
-node_b1 = Node(9, node_b2)
+node_b1 = Node(9, node_b3)
 
-res = add_with_stack(node_a1,node_b1)
+
+res = add_with_reverse(node_a1,node_b1)
 traverse(res)
