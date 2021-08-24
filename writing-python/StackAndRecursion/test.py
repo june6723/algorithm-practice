@@ -1,19 +1,21 @@
-nums = [1,2,3,4,5]
+from typing import List
 
-def sum_elements(nums):
-  sum = 0
-  for i in nums:
-    sum = sum + i
-  return sum
 
-print(sum_elements(nums))
+def group_sum(nums: List[int], subset: List[bool], target: int, i: int) -> bool:
+  if i == len(nums):
+    subset_sum = 0
+    for i, v in enumerate(nums):
+      if subset[i]:
+        subset_sum += v
+    return (subset_sum == target)
+  
+  subset[i] = False
+  not_select = group_sum(nums, subset, target, i + 1)
+  subset[i] = True
+  select = group_sum(nums, subset, target, i + 1)
 
-def sum_recursion(nums):
-  if len(nums) == 0:
-    return 0
-  if len(nums) == 1:
-    return nums[0]
+  return (not_select | select)
 
-  return nums[0] + sum_recursion(nums[1:])
-
-print(sum_recursion(nums))
+nums = [1, 2]
+subset = [False] * len(nums)
+print(group_sum(nums, subset, 3, 0))
