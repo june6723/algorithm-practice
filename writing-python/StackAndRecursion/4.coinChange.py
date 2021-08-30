@@ -33,4 +33,4 @@ def coinChange2(coins: List[int], value: int) -> int:
   return ans if ans != sys.maxsize + 1 else -1
 
 # print(coinChange([1,2,5], 11));
-print(coinChange2([1,2,5], 11));
+print(coinChange2([1,2], 11));
