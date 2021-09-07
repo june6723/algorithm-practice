@@ -10,6 +10,28 @@ class Node:
 class BinarySearchTree:
   def __init__(self):
     self.__root = None
+  
+  def create_bst(self, nodes_list):
+    nodes = [None if item is None else Node(item) for item in nodes_list]
+    # root nodes
+    self.__root = nodes[0]
+
+    for index in range(1, len(nodes)):
+      node = nodes[index]
+
+      if node is not None:
+        parent_index = (index - 1) // 2
+        parent = nodes[parent_index]
+        if parent is None:
+          raise ValueError(
+            f'Missing parent node at index {parent_index},'
+            f'Node({node.data})'
+          )
+        if index % 2 == True:
+          parent.left = node
+        else:
+          parent.right = node
+
   def insert(self, data, method='iterative'):
     if method in 'recursion':
       self.__root = self._insert_rec(self.__root, data)
@@ -114,14 +136,13 @@ class BinarySearchTree:
     return node
 
 bst = BinarySearchTree()
-bst.insert(20)
-bst.insert(25)
-bst.insert(14)
-bst.insert(30)
-bst.insert(23)
-bst.insert(18)
-bst.insert(11)
-bst.insert(21)
-bst.insert(15)
-bst.delete(18)
+
+input_datas = []
+for item in input().split(' '):
+  if item == 'N':
+    input_datas.append(None)
+  else:
+    input_datas.append(int(item))
+
+bst.create_bst(input_datas)
 print(bst.inorder_traverse())
