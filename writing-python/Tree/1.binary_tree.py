@@ -134,6 +134,31 @@ class BinarySearchTree:
         else:
           parent.right = child
     return node
+  
+  def depth_first_search(self):
+    res = []
+    res = self.dfs_iter()
+
+    print(f'dfs iter : {res}')
+
+  def dfs_iter(self):
+    stack = []
+    result = []
+    if self.__root == None:
+      return 
+    stack.append(self.__root)
+    
+    while (len(stack) != 0):
+      curr = stack.pop()
+      result.append(curr.data)
+      left = curr.left
+      right = curr.right
+      if right != None:
+        stack.append(right)
+      if left != None:
+        stack.append(left)
+      
+    return result
 
 bst = BinarySearchTree()
 
@@ -145,4 +170,4 @@ for item in input().split(' '):
     input_datas.append(int(item))
 
 bst.create_bst(input_datas)
-print(bst.inorder_traverse())
+bst.depth_first_search()
