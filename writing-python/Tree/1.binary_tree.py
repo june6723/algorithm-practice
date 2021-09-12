@@ -1,3 +1,4 @@
+from typing import List
 class Node:
   def __init__(self, data):
     self.left = None
@@ -137,7 +138,8 @@ class BinarySearchTree:
   
   def depth_first_search(self):
     res = []
-    res = self.dfs_iter()
+    # res = self.dfs_iter()
+    ret = self.dfs_rec(self.__root, res)  
 
     print(f'dfs iter : {res}')
 
@@ -159,6 +161,17 @@ class BinarySearchTree:
         stack.append(left)
       
     return result
+  def dfs_rec(self, node: Node, result: List[Node]):
+    if node == None:
+      return
+    result.append(node)
+    right = node.right
+    left = node.left
+    if left != None:
+      self.dfs_rec(left, result)  
+    if right != None:
+      self.dfs_rec(right, result)
+    
 
 bst = BinarySearchTree()
 
